@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title  %} Update Page {% endblock %}
+
+{% block contents %}
+<form action="{% url 'update' pk %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">First Name</label>
+      <input type="text" name="first" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{f_name}}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Middle Name <span>*</span></label>
+        <input type="text" name="middle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{m_name}}">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+        <input type="text" name="last" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{l_name}}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Age</label>
+        <input type="number" name="age" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{age}}" required>
+      </div>
+
+      {% if gender == 'Male' %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Gender</label>
+          <select type="text" name="gender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <option value="{{gender}}">{{gender}}</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+          </select>
+        </div>
+      {% elif gender == 'Female' %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Gender</label>
+          <select type="text" name="gender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <option value="{{gender}}">{{gender}}</option>
+              <option value="Female">Male</option>
+              <option value="Other">Other</option>
+          </select>
+        </div>
+      {% elif gender == 'Other' %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Gender</label>
+          <select type="text" name="gender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <option value="{{gender}}">{{gender}}</option>
+              <option value="Female">Male</option>
+              <option value="Other">Female</option>
+          </select>
+        </div>
+      {% endif %}
+      
+    <input type="submit" value="submit">
+
+  </form><br><br>
+{% endblock %}

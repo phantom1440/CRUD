@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %} Home Page {% endblock %}
+
+{% block contents %}
+
+<form action="#" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">First Name</label>
+      <input type="text" name="f_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Middle Name<span>*</span></label>
+        <input type="text" name="m_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+        <input type="text" name="l_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Age</label>
+        <input type="number" name="age" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Gender</label>
+        <select type="text" name="gender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            <option value="">--Select Gender--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+      </div>    
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form><br><br>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Middle Name</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        
+        {% for user in users %}
+            <tr>
+                <td>{{user.f_name}}</td>
+                <td>{{user.m_name}}</td>
+                <td>{{user.l_name}}</td>
+                <td>{{user.full_name}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.gender}}</td>
+                <td><a href="{% url 'update' user.id %}" class="btn btn-primary">Update</a> <a href="{% url 'delete' user.id %}" class="btn btn-danger">Delete</a> </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+  
+
+{% endblock %}
